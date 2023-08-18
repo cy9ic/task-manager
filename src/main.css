@@ -1,0 +1,87 @@
+.Categories *{
+    padding: 10px;
+}
+
+
+.Categories > * :hover{
+    
+    border-radius: 15px;
+    
+    background-color: rgb(222, 100, 228);
+ }
+
+
+ .Cards{
+     border: 1px solid gray;
+     border-radius: 10px;
+     
+
+ }
+
+ .Cards > *{
+    margin: 10px;
+    
+ }
+
+ 
+
+ .Todocard > *{
+margin: 20px;
+
+ }
+
+ .Todocard{
+    
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+ }
+
+
+
+
+ .addbutton{
+    border: 1px solid gray;
+    border-radius: 5px;
+    
+    width: auto;
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    color: rgb(87, 86, 86);
+    background-color: rgb(202, 202, 202);
+ }
+
+ 
+
+ .formc{
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    
+ }
+
+ input :focus{
+    outline: none;
+ }
+ body{
+    margin: 0;
+    padding: 0;
+ }
+
+ .blur-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity */
+    backdrop-filter: blur(10px); /* Apply the blur effect */
+    pointer-events: none; /* Allow interaction with elements behind the overlay */
+
+ }
