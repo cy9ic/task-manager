@@ -1,6 +1,14 @@
 #Tech Stack used :
 
-HTML 
+HTML
+
+
 CSS 
+
+
 JAVASCRIPT
+
+
 LOCAL STORAGE 
+
+
