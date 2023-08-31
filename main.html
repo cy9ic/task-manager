@@ -6,32 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
+    
     <head>
         <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="/dist/output.css" rel="stylesheet">
-
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <link rel="stylesheet" href="./dist/output.css">
+        
         <link rel="stylesheet" href="src/main.css">
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>        
+      <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendar');
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+          });
+          calendar.render();
+        });
+  
+      </script>
 
     </head>
 
 <body>
+     
     <div class="blur-overlay hidden " id="temp"></div>
     <div class="formc  " id="formcc">
 
-        <form id="submitform" class="flex flex-col space-y-5 p-5 md:w-96 md:m-auto  ">
-            <ul>
-                <span class="text-xl  font-semibold">Create Event
-
-                    <button class="ml-40" onclick="relode(event)">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                            stroke="currentColor" class="pt-1 stroke-2 w-5 h-5">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-
-                    </button>
-                </span>
+        <form id="submitform" class="flex flex-col space-y-5 p-5 md:w-96 md:m-auto">
+            <ul class="flex">
+                <span id="formspan" class="text-xl font-semibold"></span>
+                <button class=" ml-auto bg-black text-white rounded-xl p-2 " onclick="relode(event)">Remove</button>
 
             </ul>
             <label for="EventName">Task name</label>
@@ -55,9 +61,9 @@
 
 
             <select name="Categorie" id="" class="w-fit p-2 rounded-md">
-                <option value="">Work</option>
-                <option value="">Home</option>
-                <option value="">Shopping</option>
+                <option value="Work">Work</option>
+                <option value="Home">Home</option>
+                <option value="Shopping">Shopping</option>
             </select>
 
             <div>
@@ -69,18 +75,7 @@
                 <button id="addSubtaskButton" class="mt-4 mb-4  text-white bg-black rounded-md p-1">Add Subtask</button>
             </div>
 
-
-
-
-
-
-
-
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-md">Create Event</button>
-
-
-
-
 
         </form>
 
@@ -120,6 +115,7 @@
 
 
     <div class="main flex">
+       
         <div class="left h-[100vh] w-20 bg-inherit border-r-2 hidden md:block">
 
 
@@ -147,6 +143,7 @@
                 </li>
 
             </ul>
+            
 
             <div class="">
                 <button class="absolute bottom-0  rounded-full  border-2  p-2 ml-4"><svg
@@ -165,7 +162,7 @@
             <ul class="space-y-3">
 
                 <li>
-                    <h1 class="text-5xl font-semibold mt-20 ml-10">Cy9ic2932 Dashboard</h1>
+                    <h1 class="text-5xl font-semibold mt-20 ml-10">Cy9ic# 2932 Dashboard</h1>
                 </li>
                 <li><span class="ml-12">Updated one day ago</span></li>
             </ul>
@@ -174,10 +171,10 @@
 
 
             <ul class="Categories flex flex-wrap justify-center md:justify-start md:ml-10 mt-3 space-x-2 md:space-x-9 ml-0">
-                <li><button>Overall</button></li>
-                <li><button>Work</button></li>
-                <li><button>Home</button></li>
-                <li><button>Shopping</button></li>
+                <li><button onclick="maptodo()">Overall</button></li>
+                <li><button onclick="workrender()">Work</button></li>
+                <li><button onclick="homerender()">Home</button></li>
+                <li><button onclick="shoppingrender()">Shopping</button></li>
 
 
             </ul>
@@ -206,187 +203,42 @@
 
             </ul>
 
+
+            <!-- --------------------------------------------------------------------- -->
+            
+
             <div class="flex max-md:flex-col cardsection max-md:space-y-10 max-md:-ml-5  ">
 
-                <div class="Todocard space-y-6 ml-10 w-fit pb-5">
+                <div class="Todocard space-y-6 ml-10 w-fit pb-5" id="filltodo">
                     <span class="font-semibold ">To Do</span>
-
-                    <div class="Cards flex flex-col w-fit ">
-                        <div class="flex">
-                            <span class="text-xl font-semibold">Input Fields</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class=" ml-auto mr-2 w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-
-                        </div>
-                        <span class="bg-yellow-200 text-orange-800 rounded-xl font-bold p-1 w-fit">Design System</span>
-                        <hr class=" border-t-2">
-
-                        <div class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
-                            </svg>
-                            <span>1/4</span>
-
-
-                            <div class="flex w-48 ">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    strokeWidth={1.5} stroke="currentColor" class="ml-auto  w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="mr-2">14 days</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <!-- Card2------------------------------------ -->
-
-
-                    <div class="Cards flex flex-col w-fit ">
-                        <div class="flex">
-                            <span class="text-xl font-semibold">Input Fields</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class=" ml-auto mr-2 w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-
-                        </div>
-                        <span class="bg-yellow-200 text-orange-800 rounded-xl font-bold p-1 w-fit">Design System</span>
-                        <hr class=" border-t-2">
-
-                        <div class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
-                            </svg>
-                            <span>1/4</span>
-
-
-                            <div class="flex w-48 ">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    strokeWidth={1.5} stroke="currentColor" class="ml-auto  w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="mr-2">14 days</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <button onclick="add()" class="flex hover:bg-gray-700 hover:text-black addbutton">
+                    <button onclick=add(event) id="addingbutton" class="flex hover:bg-gray-700 hover:text-black addbutton">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                             stroke="currentColor" class="h-5 w-5 mr-1 ml-5  stroke-2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                        <span class="text-sm mr-12">Add Card</span>
+                        <span class="text-sm mr-12">Create ToDo</span>
                     </button>
+                    <div id="fillup" class=" TodoCard ">
+                        
+                    </div>
 
                 </div>
                 <!-- Inprogress---------------------------------- -->
 
 
-                <div class="Todocard space-y-6 ml-10 w-fit pb-5">
+                <div class="Todocard space-y-6 ml-10 w-fit pb-5" id="inprogresscards">
+
                     <span class="font-semibold ">In Progress</span>
-
-                    <div class="Cards flex flex-col w-fit">
-                        <div class="flex">
-                            <span class="text-xl font-semibold">Input Fields</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class=" ml-auto mr-2 w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-
-                        </div>
-                        <span class="bg-yellow-200 text-orange-800 rounded-xl font-bold p-1 w-fit">Design System</span>
-                        <hr class=" border-t-2">
-
-                        <div class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
-                            </svg>
-                            <span>1/4</span>
-
-
-                            <div class="flex w-48 ">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    strokeWidth={1.5} stroke="currentColor" class="ml-auto  w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="mr-2">14 days</span>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-                    <!-- Card2------------------------------------ -->
-
-
-                    <div class="Cards flex flex-col w-fit">
-                        <div class="flex">
-                            <span class="text-xl font-semibold">Input Fields</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class=" ml-auto mr-2 w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-
-                        </div>
-                        <span class="bg-yellow-200 text-orange-800 rounded-xl font-bold p-1 w-fit">Design System</span>
-                        <hr class=" border-t-2">
-
-                        <div class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
-                            </svg>
-                            <span>1/4</span>
-
-
-                            <div class="flex w-48 ">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    strokeWidth={1.5} stroke="currentColor" class="ml-auto  w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="mr-2">14 days</span>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <button onclick="add()" class="flex hover:bg-gray-700 hover:text-black addbutton">
+                    <button onclick="add(event)" id="inprogressbutton" class="flex hover:bg-gray-700 hover:text-black addbutton">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                             stroke="currentColor" class="h-5 w-5 mr-1 ml-5  stroke-2">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                        <span class="text-sm mr-12">Add Card</span>
+                        <span class="text-sm mr-12">In Progress</span>
                     </button>
+                    <div id="fillprogress" class="Todocard"></div>
+
+                    
 
 
 
@@ -398,104 +250,24 @@
                 <!-- ------------------------------------------------------Done -->
 
 
-                <div class="Todocard space-y-6 ml-10 w-fit pb-5">
+                <div class="Todocard space-y-6 ml-10 w-fit pb-5" id="donecards">
                     <span class="font-semibold "> Done</span>
+                    
+                                        <button onclick="add(event)" class="flex hover:bg-gray-700 hover:text-black addbutton">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                                                stroke="currentColor" class="h-5 w-5 mr-1 ml-5  stroke-2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                            </svg>
+                                            <span class="text-sm mr-12">Add Done</span>
+                                        </button>
 
-                    <div class="Cards flex flex-col w-fit">
-                        <div class="flex">
-                            <span class="text-xl font-semibold">Input Fields</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class=" ml-auto mr-2 w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-
-                        </div>
-                        <span class="bg-yellow-200 text-orange-800 rounded-xl font-bold p-1 w-fit">Design System</span>
-                        <hr class=" border-t-2">
-
-                        <div class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
-                            </svg>
-                            <span>1/4</span>
-
-
-                            <div class="flex w-48 ">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    strokeWidth={1.5} stroke="currentColor" class="ml-auto  w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="mr-2">14 days</span>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-                    <!-- Card2------------------------------------ -->
-
-
-                    <div class="Cards flex flex-col w-fit">
-                        <div class="flex">
-                            <span class="text-xl font-semibold">Input Fields</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class=" ml-auto mr-2 w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-
-                        </div>
-                        <span class="bg-yellow-200 text-orange-800 rounded-xl font-bold p-1 w-fit">Design System</span>
-                        <hr class=" border-t-2">
-
-                        <div class="flex">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                                stroke="currentColor" class="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round"
-                                    d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
-                            </svg>
-                            <span>1/4</span>
-
-
-                            <div class="flex w-48 ">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    strokeWidth={1.5} stroke="currentColor" class="ml-auto  w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span class="mr-2">14 days</span>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <button onclick="add()" class="flex hover:bg-gray-700 hover:text-black addbutton">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                            stroke="currentColor" class="h-5 w-5 mr-1 ml-5  stroke-2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        <span class="text-sm mr-12">Add Card</span>
-                    </button>
-
-
-
-
+                    <div class="Todocard" id="filldone"></div>
                 </div>
 
             </div>
         </div>
-
+        
+        <div id="calendar" class="mt-96 w-[50%] max-sm:hidden max-xl:hidden max-md:hidden" ></div>
 
 
 
